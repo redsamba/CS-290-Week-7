@@ -12,8 +12,14 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/Get',function(req,res){
-  res.render('GetRequest') 
+app.get('/get-loopback-improved',function(req,res){
+  var qParams = [];
+  for (var p in req.query){
+    qParams.push({'name':p,'value':req.query[p]})
+  }
+  var context = {};
+  context.dataList = qParams;
+  res.render('get-loopback-improved', context);
 });
 
 app.post('/Post',function(req,res){
