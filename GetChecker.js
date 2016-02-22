@@ -22,8 +22,16 @@ app.get('/Get',function(req,res){
   res.render('GetRequest', context);
 });
 
-app.post('/Post',function(req,res){
-  res.render('PostRequest');
+app.post('/Post', function(req,res){
+  var qParams = [];
+  for (var p in req.body){
+    qParams.push({'name':p,'value':req.body[p]})
+  }
+  console.log(qParams);
+  console.log(req.body);
+  var context = {};
+  context.dataList = qParams;
+  res.render('PostRequest', context);
 });
 
 app.use(function(req,res){
